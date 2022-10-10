@@ -14,14 +14,14 @@
         version = "0.0.1dev";
         src = ./.;
         buildInputs = with pkgs; [ bash yq libreoffice ];
-        #nativeBuildInputs = with pkgs; [ makeWrapper ];
         installPhase = ''
           mkdir -p $out/bin
           cp lora.sh $out/bin/lora.sh
           '';
-          #wrapProgram $out/bin/lora.sh \
-            #--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.bash pkgs.yq pkgs.libreoffice ]}
-        #'';
+        meta = {
+          homepage = "https://github.com/pinselimo/lora";
+          license = pkgs.lib.licenses.mit;
+        };
       };
 
     in {
