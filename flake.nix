@@ -16,7 +16,7 @@
         buildInputs = with pkgs; [ bash yq libreoffice ];
         installPhase = ''
           mkdir -p $out/bin
-          cp lora.sh $out/bin/lora.sh
+          cp lora.sh $out/bin/lora
           '';
         meta = {
           homepage = "https://github.com/pinselimo/lora";
@@ -27,7 +27,7 @@
     in {
       apps.default = {
         type = "app";
-        program = "${drv}/bin/lora.sh";
+        program = "${drv}/bin/lora";
       };
       packages.default = drv;
       devShells.default = pkgs.mkShell {
