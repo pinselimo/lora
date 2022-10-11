@@ -24,6 +24,8 @@ To additionally suppress LibreOffice's recovery dialogue use the ``--noprompt`` 
 
 A combination of the ``--noprompt`` and the ``--delete`` flag will lead to the loss of all unsaved edits!
 
+Because the ``--delete`` option will alter the recovery file registry, Lora backs it up at ``.config/lora/registrymodifications.xcu``. To restore it use ``lora --restore``. To overwrite the backup with a new one use ``lora --backup``. This will not backup any unsaved changes in your documents!
+
 ## License
 
 This project is open source under the ``MIT`` license (C) 2022 Simon Plakolb. Find more information in the accompanying ``LICENSE`` file.
