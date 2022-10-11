@@ -160,17 +160,25 @@ then
                             | map(select(."@oor:name" == "OriginalURL"))
                             | .[].value
                             ' "$REGISTRYMOD")
-        for url in "$URLS"; do
+        while IFS= read -r url; do
                 if [ "$url" ];
                 then
                         echo "Opening libreoffice with:" "$*" "$addargs" "$url"
                         if [ "$url" = "null" ]
-                        then if [ "$u" = "y" ]; then libreoffice "$*"; fi
+                        then if [ "$u" = "y" ]
+                             then libreoffice "$*" &
+                             fi
                         else
-                             libreoffice "$*" "$addargs" $(sed 's/[""]//g;s/file:\/\///g' <<< "$url")
+                             libreoffice "$*" $addargs $(sed 's/[""]//g;s/file:\/\///g' <<< "$url") &
                         fi
                 fi
-        done
+        done <<< "$URLS"
+        echo "Nothing more to recover"
+else
+        if [ ! "$f" = "n" ]
+        then
+                echo "LibreOffice is already running"
+        fi
 fi
 
 if [ "$d" = "y" ]
